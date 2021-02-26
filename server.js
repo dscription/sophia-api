@@ -2,28 +2,22 @@ var express = require('express');
 var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 const mongoose = require('mongoose');
+const schema = require('./schema/schema')
 require('dotenv').config();
-
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
 
-
 // Construct a schema, using GraphQL schema language
-var schema = buildSchema(`
-  type Resource {
-    name: String
-    description: String
-    trelloId: String
-    lables: []
-    shortUrl: String
-    checklists: []
-  }
+// var schema = buildSchema(`
+//   type Resource {
+//     name: String
+//   }
 
-  type Query {
-    hello: String
-  }
-`);
+//   type Query {
+//     hello: String
+//   }
+// `);
 
 // The root provides a resolver function for each API endpoint
 var root = {
@@ -59,9 +53,3 @@ app.get('/trelloCallback', function (req, res) {
 app.post('/trelloCallBack', function (req, res) {
   console.log('action', req.body.action.data);
 });
-
-
-
-// initResources()
-// initChecklists()
-// getAllResourcesWithChecklists().then((resources) => console.log(resources));
