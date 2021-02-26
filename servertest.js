@@ -34,3 +34,7 @@ app.get('/trelloCallback', function (req, res) {
   // } catch {}
   res.status(200).send('You hit the server');
 });
+
+app.post('/trelloCallBack', function (req, res) {
+  console.log(req);
+});
