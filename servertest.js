@@ -17,6 +17,7 @@ var root = {
 };
 
 var app = express();
+app.use(express.json())
 app.use(
   '/graphql',
   graphqlHTTP({
@@ -36,5 +37,5 @@ app.get('/trelloCallback', function (req, res) {
 });
 
 app.post('/trelloCallBack', function (req, res,) {
-  console.log(req)
+  console.log('___________________#####',req.body)
 });
