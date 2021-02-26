@@ -30,6 +30,7 @@ console.log('Running a GraphQL API server at http://localhost:4000/graphql');
 
 app.get('/trelloCallback', function (req, res) {
   // console.log(req);
-  try {} catch {}
-  return res.status(200);
+  // try {
+  // } catch {}
+  res.status(200).send('You hit the server');
 });
