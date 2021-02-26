@@ -26,6 +26,14 @@ const createResource = async (newResource) => {
   });
 };
 
+const getResource = async (trelloId) => {
+  Resource.find(
+    {trelloId:trelloId}
+  ).then(data => console.log(data))
+}
+
+
+
 // Fetch all cards on board
 // ! Returns a large array. Stored in sampleData.js as cards variable.
 const getAllCards = async () => {
@@ -115,6 +123,16 @@ app.get('/trelloCallback', function (req, res) {
 
 app.post('/trelloCallBack', function (req, res) {
   console.log('action', req.body.action.data);
+  // shape the data into a payload
+  const resourceData = {
+    
+  }
+  // updateOrCreateResource()
 });
 
-initResources();
+// initResources();
+getResource("600e70a88d2d345e01d733ea")
+
+const updateOrCreateResource = async (data) => {
+
+}
