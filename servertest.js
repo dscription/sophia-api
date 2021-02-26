@@ -37,5 +37,6 @@ app.get('/trelloCallback', function (req, res) {
 });
 
 app.post('/trelloCallBack', function (req, res,) {
-  console.log('___________________#####',req.body)
+  console.log('action',req.body.action)
+  console.log('type', req.body.type)
 });
