@@ -12,7 +12,12 @@ const db = mongoose.connection;
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
   type Resource {
-    
+    name: String
+    description: String
+    trelloId: String
+    lables: []
+    shortUrl: String
+    checklists: []
   }
 
   type Query {

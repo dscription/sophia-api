@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const resourceSchema = new Schema({
   _id: String,
-  trelloId: String,
+  name: String,
   description: String,
+  trelloId: String,
   labels: [],
   shortUrl: String,
   checklists: [{ type: Schema.Types.ObjectId, ref: 'Checklist' }],
-  name: String,
 });
 
 module.exports = mongoose.model('Resource', resourceSchema);
