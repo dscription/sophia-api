@@ -1,30 +1,11 @@
 var express = require('express');
 var { graphqlHTTP } = require('express-graphql');
-var { buildSchema } = require('graphql');
 const mongoose = require('mongoose');
-const schema = require('./schema/schema')
+const schema = require('./schema/schema');
 require('dotenv').config();
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
-
-// Construct a schema, using GraphQL schema language
-// var schema = buildSchema(`
-//   type Resource {
-//     name: String
-//   }
-
-//   type Query {
-//     hello: String
-//   }
-// `);
-
-// The root provides a resolver function for each API endpoint
-var root = {
-  hello: () => {
-    return 'Hello world!';
-  },
-};
 
 var app = express();
 app.use(express.json());
@@ -32,7 +13,6 @@ app.use(
   '/graphql',
   graphqlHTTP({
     schema: schema,
-    rootValue: root,
     graphiql: true,
   })
 );
