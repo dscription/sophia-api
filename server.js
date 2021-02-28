@@ -181,7 +181,7 @@ app.post('/trelloCallBack', function (req, res) {
       Resource.findById(data.card.id).then((resource) => {
         resource.labels.splice(
           resource.labels.findIndex(function (i) {
-            return i._id === data.label.id;
+            return i.id === data.label.id;
           }),
           1
         );
