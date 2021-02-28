@@ -14,7 +14,7 @@ const checklistSchema = new Schema({
   name: String,
   cardId: String,
   boardId: String,
-  items: [],
+  items: Array,
 });
 
 module.exports = mongoose.model('Checklist', checklistSchema);

@@ -7296,3 +7296,23 @@ const checkList = {
     },
   ],
 };
+
+// action.type - types
+// create card - createCard
+  // action.data.card.id
+  // action.data.card.name/shortLink
+// change description text - updateCard
+  // data on old card - action.data.old.desc
+  // updated card - action.data.card.desc
+// add label - 'addLabelToCard'
+  //
+  // action.data.label.id/name/color
+// create checklist - addChecklistToCard
+  // action.data.checklist.id
+// add item to checklist - createCheckItem
+  // action.data.checklist.id
+  // action.data.checkItem.id
+// update item on checklist - updateCheckItem
+  // ''
+// delete checklist - removeChecklistFromCard
+  // action.data.checklist.id

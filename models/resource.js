@@ -6,7 +6,7 @@ const resourceSchema = new Schema({
   name: String,
   description: String,
   trelloId: String,
-  labels: [],
+  labels: Array,
   shortUrl: String,
   checklists: [{ type: Schema.Types.ObjectId, ref: 'Checklist' }],
 });

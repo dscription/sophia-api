@@ -1,5 +1,6 @@
 const graphql = require('graphql');
 const Resource = require('../models/resource');
+const Checklist = require('../models/checklist');
 
 // Define the schema, the object types and relations between object types and how you can reach into the graph and interact with that data, query or mutate the data.
 const {
@@ -20,15 +21,42 @@ const ResourceType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     trelloId: { type: GraphQLString },
-    // labels: { type: GraphQLList },
+    labels: { type: GraphQLList(LabelType) },
     shortUrl: { type: GraphQLString },
+    checklists: { type: GraphQLList(ChecklistType) },
   }),
 });
 
-// todo: ChecklistType
+const LabelType = new GraphQLObjectType({
+  name: 'Label',
+  fields: () => ({
+    id: { type: GraphQLString },
+    idBoard: { type: GraphQLString },
+    name: { type: GraphQLString },
+    color: { type: GraphQLString },
+  }),
+});
 
-// todo
+const ChecklistType = new GraphQLObjectType({
+  name: 'Checklist',
+  fields: () => ({
+    trelloId: { type: GraphQLString },
+    name: { type: GraphQLString },
+    cardId: { type: GraphQLString },
+    boardId: { type: GraphQLString },
+    items: { type: GraphQLList(ItemType) },
+  }),
+});
 
+const ItemType = new GraphQLObjectType({
+  name: 'Item',
+  fields: () => ({
+    idChecklist: { type: GraphQLString },
+    state: { type: GraphQLString },
+    id: { type: GraphQLString },
+    name: { type: GraphQLString },
+  }),
+});
 
 // Root querys are how we describe how the user can jump into the graph and grab data.
 const RootQuery = new GraphQLObjectType({
@@ -47,7 +75,18 @@ const RootQuery = new GraphQLObjectType({
     resources: {
       type: new GraphQLList(ResourceType),
       resolve(parent, args) {
-        return Resource.find({});
+        return Resource.find({})
+          .populate('checklists')
+          .then((resources) => resources);
+      },
+    },
+    // checklist: {
+
+    // },
+    checklists: {
+      type: new GraphQLList(ChecklistType),
+      resolve(parent, args) {
+        return Checklist.find({});
       },
     },
   },
