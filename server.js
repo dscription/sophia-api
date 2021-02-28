@@ -161,25 +161,23 @@ app.post('/trelloCallBack', function (req, res) {
       break;
     // update the name, description of card
     case 'updateCard':
-      Resource.findByIdAndUpdate(
-        data.card.id,
-        {
-          description: data.card.desc,
-          name: data.card.name,
-        },
-        {
-          new: true,
-        }
-      );
+      console.log('updating Card');
+      Resource.findById(data.card.id).then((resource) => {
+        resource.description = data.card.desc;
+        resouce.name = data.card;
+        resource.save();
+      });
       break;
     // add a label to a card
     case 'addLabelToCard':
+      console.log('adding label to card');
       Resource.find({ _id: data.card.id }).then((resouce) => {
         resource.labels.push(data.label);
         resource.save();
       });
       break;
     case 'removeLabelFromCard':
+      console.log('removing label from card');
       Resource.find({ _id: data.card.id }).then((resource) => {
         resource.labels.splice(
           resource.findIndex(function (i) {
@@ -191,6 +189,7 @@ app.post('/trelloCallBack', function (req, res) {
       });
       break;
     case 'addChecklistToCard':
+      console.log('adding checklist to card');
       Checklist.create({
         _id: data.checklist.id,
         trelloId: data.checklist.id,
@@ -206,6 +205,7 @@ app.post('/trelloCallBack', function (req, res) {
       });
       break;
     case 'removeChecklistFromCard':
+      console.log('removing checklist from card');
       Resource.findById(data.card.id).then((resource) => {
         resource.checklists.splice(
           resource.checklists.findIndex(function (i) {
@@ -217,12 +217,14 @@ app.post('/trelloCallBack', function (req, res) {
       });
       break;
     case 'createCheckItem':
+      console.log('creating a check item');
       Checklist.findById(data.checklist.id).then((checklist) => {
         checklist.items.push(data.checkItem);
         checklist.save();
       });
       break;
     case 'updateCheckItem':
+      console.log('updating a check item');
       Checklist.findById(data.checklist.id).then((checklist) => {
         let indexOfCheckItem = checklist.items.findIndex(function (i) {
           return i.id === data.checkItem.id;
@@ -232,6 +234,7 @@ app.post('/trelloCallBack', function (req, res) {
       });
       break;
     case 'deleteCheckItem':
+      console.log('deleting cehck item');
       Checklist.findById(data.checklist.id).then((checklist) => {
         checklist.items.splice(
           checklist.items.findIndex(function (i) {
@@ -251,4 +254,3 @@ app.post('/trelloCallBack', function (req, res) {
 });
 
 // initResources();
-
