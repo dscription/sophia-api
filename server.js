@@ -41,7 +41,7 @@ app.post('/trelloCallBack', function (req, res) {
       Resource.create({
         _id: data.card.id,
         trelloId: data.card.id,
-        description: [],
+        description: '',
         labels: [],
         shortUrl: data.card.shortUrl,
         checklists: [],
