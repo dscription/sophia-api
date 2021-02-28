@@ -8,7 +8,7 @@ const resourceSchema = new Schema({
   trelloId: String,
   labels: Array,
   shortUrl: String,
-  checklists: [{ type: Schema.Types.ObjectId, ref: 'Checklist' }],
+  checklists: [{ type: Schema.Types.String, ref: 'Checklist' }],
 });
 
 module.exports = mongoose.model('Resource', resourceSchema);
