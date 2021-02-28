@@ -168,7 +168,7 @@ app.post('/trelloCallBack', function (req, res) {
         resource.save();
       });
       break;
-    // todo: add a label to a card
+    // !add a label to a card
     case 'addLabelToCard':
       console.log('adding label to card');
       Resource.findById(data.card.id).then((resource) => {
@@ -178,7 +178,7 @@ app.post('/trelloCallBack', function (req, res) {
       break;
     case 'removeLabelFromCard':
       console.log('removing label from card');
-      Resource.find({ _id: data.card.id }).then((resource) => {
+      Resource.findById(data.card.id).then((resource) => {
         resource.labels.splice(
           resource.findIndex(function (i) {
             return i._id === data.label.id;
