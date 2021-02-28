@@ -180,7 +180,7 @@ app.post('/trelloCallBack', function (req, res) {
       console.log('removing label from card');
       Resource.findById(data.card.id).then((resource) => {
         resource.labels.splice(
-          resource.findIndex(function (i) {
+          resource.labels.findIndex(function (i) {
             return i._id === data.label.id;
           }),
           1
