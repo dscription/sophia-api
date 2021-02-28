@@ -176,6 +176,7 @@ app.post('/trelloCallBack', function (req, res) {
         resource.save();
       });
       break;
+    // !remove label from card
     case 'removeLabelFromCard':
       console.log('removing label from card');
       Resource.findById(data.card.id).then((resource) => {
@@ -188,6 +189,7 @@ app.post('/trelloCallBack', function (req, res) {
         resource.save();
       });
       break;
+    // !add a checklist to a card
     case 'addChecklistToCard':
       console.log('adding checklist to card');
       Checklist.create({
@@ -204,6 +206,7 @@ app.post('/trelloCallBack', function (req, res) {
         });
       });
       break;
+    // todo: confirm this works
     case 'removeChecklistFromCard':
       console.log('removing checklist from card');
       Resource.findById(data.card.id).then((resource) => {
@@ -216,6 +219,7 @@ app.post('/trelloCallBack', function (req, res) {
         resource.save();
       });
       break;
+    // ! remove a check item
     case 'createCheckItem':
       console.log('creating a check item');
       Checklist.findById(data.checklist.id).then((checklist) => {
@@ -223,6 +227,7 @@ app.post('/trelloCallBack', function (req, res) {
         checklist.save();
       });
       break;
+    // todo: confirm this works
     case 'updateCheckItem':
       console.log('updating a check item');
       Checklist.findById(data.checklist.id).then((checklist) => {
@@ -253,4 +258,4 @@ app.post('/trelloCallBack', function (req, res) {
   }
 });
 
-// initResources();
+
