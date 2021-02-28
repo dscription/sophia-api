@@ -147,7 +147,7 @@ app.post('/trelloCallBack', function (req, res) {
   console.log('action', req.body.action.data);
   const { data } = req.body.action;
   switch (req.body.action.type) {
-    //create a resource from newly created card
+    //!create a resource from newly created card
     case 'createCard':
       Resource.create({
         _id: data.card.id,
@@ -159,7 +159,7 @@ app.post('/trelloCallBack', function (req, res) {
         name: data.card.name,
       });
       break;
-    // update the name, description of card
+    // !update the name, description of card
     case 'updateCard':
       console.log('updating Card');
       Resource.findById(data.card.id).then((resource) => {
@@ -171,7 +171,7 @@ app.post('/trelloCallBack', function (req, res) {
     // add a label to a card
     case 'addLabelToCard':
       console.log('adding label to card');
-      Resource.find({ _id: data.card.id }).then((resouce) => {
+      Resource.find({ _id: data.card.id }).then((resource) => {
         resource.labels.push(data.label);
         resource.save();
       });
