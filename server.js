@@ -164,7 +164,7 @@ app.post('/trelloCallBack', function (req, res) {
       console.log('updating Card');
       Resource.findById(data.card.id).then((resource) => {
         resource.description = data.card.desc;
-        resource.name = data.card;
+        resource.name = data.card.name;
         resource.save();
       });
       break;
