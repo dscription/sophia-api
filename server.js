@@ -168,10 +168,10 @@ app.post('/trelloCallBack', function (req, res) {
         resource.save();
       });
       break;
-    // add a label to a card
+    // todo: add a label to a card
     case 'addLabelToCard':
       console.log('adding label to card');
-      Resource.find({ _id: data.card.id }).then((resource) => {
+      Resource.findById(data.card.id).then((resource) => {
         resource.labels.push(data.label);
         resource.save();
       });
